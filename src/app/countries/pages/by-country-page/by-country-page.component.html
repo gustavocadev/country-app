@@ -7,7 +7,8 @@
     <shared-search-box
       type="search"
       placeholder="Seach..."
-      (onValue)="searchByCountry($event)"
+      (onDebounce)="searchByCountry($event)"
+      [initialValue]="initialTerm"
     />
   </div>
 </div>

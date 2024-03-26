@@ -4,11 +4,16 @@
 <div class="row">
   <div class="col">
     <!-- Searchbox -->
-    <shared-search-box
-      type="search"
-      placeholder="Seach..."
-      (onValue)="searchByRegion($event)"
-    />
+    @for (region of regions; track $index) {
+    <button
+      class="btn mx-2"
+      (click)="searchByRegion(region)"
+      [class.btn-primary]="region === selectedRegion"
+      [class.btn-secondary]="region !== selectedRegion"
+    >
+      {{ region }}
+    </button>
+    }
   </div>
 </div>
 

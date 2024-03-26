@@ -1,10 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CountriesService } from '../../services/countries.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { switchMap, tap } from 'rxjs';
+import { CountryResponse } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-country-page',
   templateUrl: './country-page.component.html',
-  styles: ``
+  styles: ``,
 })
-export class CountryPageComponent {
+export class CountryPageComponent implements OnInit {
+  country: CountryResponse | null = null;
 
+  constructor(
+    private readonly countriesService: CountriesService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Get the country code from the URL
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ id }) =>
+          this.countriesService.searchCountryByAlphaCode(id)
+        )
+      )
+      .subscribe((country) => {
+        if (!country) {
+          return this.router.navigateByUrl('');
+        }
+        console.log('Country', country);
+        this.country = country;
+        return country;
+      });
+  }
 }
