@@ -1,0 +1,24 @@
+<h2>Paises</h2>
+<hr />
+<ul class="list-group">
+  <!-- <li
+    class="list-group-item"
+    [routerLinkActiveOptions]="{ exact: true }"
+    *ngFor="let route of routes"
+    routerLinkActive="active"
+    routerLink="{{ route.path }}"
+  >
+    {{ route.name }}
+  </li> -->
+
+  @for (route of routes(); track route.path;let idx = $index) {
+  <li
+    class="list-group-item"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active"
+    routerLink="{{ route.path }}"
+  >
+    {{ route.name }}
+  </li>
+  }
+</ul>

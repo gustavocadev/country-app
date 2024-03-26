@@ -1,0 +1,42 @@
+@if (countries.length === 0) {
+<div class="alert alert-warning text-center">No hay paises que mostrar</div>
+} @else {
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Icon</th>
+      <th>Bandera</th>
+      <th>Nombre</th>
+      <th>Capital/th></th>
+      <th>Poblacion</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (country of countries; track country.name; let idx = $index) {
+    <tr>
+      <td>
+        {{ idx + 1 }}
+      </td>
+      <td>{{ country.flag }}</td>
+      <td>
+        <figure>
+          <img
+            [src]="country.flags.svg"
+            [alt]="country.name.common"
+            width="60"
+          />
+        </figure>
+      </td>
+      <td>{{ country.name.common }}</td>
+      <td>{{ country.capital }}</td>
+      <td>{{ country.population | number }}</td>
+      <td>
+        <a href="#">Ver mas</a>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+}
